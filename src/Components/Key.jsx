@@ -1,13 +1,33 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 const Key = (props) => {
     
-    let audio = new Audio(props.data.audio)
-    audio.className = "clip"
-    audio.id = props.data.key
+    const [styleHook, setStyleHook] = useState({backgroundColor: 'grey'})
+    const [audio, setAudio] = useState(null)
+
+    useEffect(()=>{
+        const configureAudioElem = () => {
+            setAudio(new Audio(props.data.audio))
+        }
+        configureAudioElem()
+    },[])
+
+    useEffect(()=>{
+        if(!audio){
+            
+        }
+        else{
+            audio.className = "clip"
+            audio.id = props.data.key
+        }
+    },[audio])
 
     const playSound = () => {
+        setStyleHook({backgroundColor: 'orange'})
         audio.play()
+        setTimeout(() => {
+            setStyleHook({backgroundColor: 'grey'})
+        }, 100);
     }
 
     const playKeySound = (e) => {
@@ -18,7 +38,7 @@ const Key = (props) => {
 
     return(
         <>
-            <button className="drum-pad" id={props.data.key} onClick={playSound} onKeyDown={playKeySound} style={{backgroundColor: 'grey'}}>
+            <button className="drum-pad" id={props.data.key} onMouseDown={playSound} onKeyDown={playKeySound} style={styleHook}>
                 {props.data.key}
             </button>
         </>

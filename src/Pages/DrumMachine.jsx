@@ -6,8 +6,8 @@ import React,{ useEffect } from "react";
 const drumMachineStyle = {
     display: 'flex',
     flexDirection: 'row',
-    width: '350px',
-    height: '185px',
+    width: '620px',
+    height: '376px',
     border: '3px solid orange'
 }
 
